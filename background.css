@@ -15,7 +15,7 @@
     font-weight: normal;
     -webkit-font-smoothing: antialiased;
     padding: 1em;
-    color: rgba(0,0,0,0.45);
+    color: rgb(251 251 251 / 55%);
     text-shadow: 0 0 1px rgba(0,0,0,0.1);
     font-size: 1.5em;
 }
@@ -31,7 +31,7 @@
     transition: background 0.3s, box-shadow 0.3s;
 }
 .flat-table-1 {
-    background: #336ca6;
+    background: rgb(51 108 166 / 53%);;
 }
 .flat-table-1 tr:hover {
     background: rgba(0,0,0,0.19);
@@ -50,4 +50,8 @@
 }
 .time-meeting{
     background: rgba(124, 194, 12, 0.1);
+}
+.jumb-head-info{
+    background: #1c1d1d8f;
+    color: #4b9194d1;
 }

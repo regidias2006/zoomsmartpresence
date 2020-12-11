@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Zoom Smart Presence",
     "version": "1.0.0",
-    "web_accessible_resources": ["cpanel.html", "/assets/css/bootstrap.min.css","/assets/js/lib/jquery.min.js", "/assets/js/lib/bootstrap.min.js", "background.css"],
+    "web_accessible_resources": ["cpanel.html", "/assets/css/bootstrap.min.css","/assets/js/lib/jquery.min.js", "/assets/js/lib/bootstrap.min.js", "background.css", "/assets/js/lib/moment.min.js"],
     "description": "This application is for help the FIT and Flex Company monitoring the people in a Meeting in Zoom conference. ",
     "short_name": "Zoom Smart Presence",
     "permissions": ["activeTab", "declarativeContent", "storage", "<all_urls>"],

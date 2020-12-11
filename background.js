@@ -17,6 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
    function AddJqueryUi() {
     chrome.tabs.executeScript( { file: "/assets/js/lib/jquery-ui.js" })
    }
+   
+   function AddMoment() {
+    chrome.tabs.executeScript( { file: "/assets/js/lib/moment.min.js" })
+   }
 
    function AddVue() {
     chrome.tabs.executeScript( { file: "/assets/js/lib/vue.js" })
@@ -29,13 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
    function PrepareConstructor() {
     chrome.tabs.executeScript( { file: "/assets/js/app/prepare.js" })
    }
-
-
-
-//    chrome.tabs.executeScript(null, { 
-//      code: "document.body.appendChild(document.createElement('script')).src='" + 
-//        chrome.extension.getURL("popup.html") +"';" 
-//    }, null);
 
    function MonitorConstructor() {
     chrome.tabs.executeScript( { file: "/assets/js/app/main.js" })

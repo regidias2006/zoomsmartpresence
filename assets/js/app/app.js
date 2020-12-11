@@ -1,55 +1,32 @@
 
 
+var buttons = document.querySelectorAll(".footer-button__button");
+var elem = buttons[0]
 
-$("#wc-container-left").empty();
-$("#wc-container-left").css("overflow", "scroll");
-
- $("#wc-container-left").load(chrome.extension.getURL("cpanel.html"));
-
-
+eventFire(elem, 'click');
+$('[class="main-layout"]').css("overflow", "scroll");
 
 
-
-// var iFrame  = document.createElement ("iframe");
-// iFrame.src  = chrome.extension.getURL("test.html");
-
-
-// document.body.insertBefore(iFrame, document.body.firstChild);
-
-// var vuetest = "\
-// <div id='app-4'>\
-//   <ol>\
-//     <li v-for='todo in todos'>\
-//       {{ todo.text }}\
-//     </li>\
-//   </ol>\
-// </div>\
-// <script>\
-// var app4 = new Vue({\
-//     el: '#app-4',\
-//     data: {\
-//       todos: [\
-//         { text: 'Learn JavaScript' },\
-//         { text: 'Learn Vue' },\
-//         { text: 'Build something awesome' }\
-//       ]\
-//     }\
-//   })\
-//   </script>";
-
-// var xhr = new XMLHttpRequest();
-// // xhr.onreadystatechange = handleStateChange; // Implemented elsewhere
-// fetch(chrome.extension.getURL('test.html'))
-//     .then(response => response.text())
-//     .then(data => {
-//         document.getElementById('#wc-container-left').innerHTML = data;
-//         // other code
-//         // eg update injected elements,
-//         // add event listeners or logic to connect to other parts of the app
-//     }).catch(err => {
-//         // handle error
-//     });
-
+var response;
+$.ajax({ type: "GET",   
+     url: chrome.extension.getURL("cpanel.html"),   
+     async: false,
+     success : function(text)
+     {
+         $("#app-visualizer").remove();
+         response = text;
+     }
+});
+$('[class="main-layout"]').prepend('<div id="app-visualizer" style = "margin-right: 12px; position: absolute; z-index: 2; background: rgb(24,82,71); background: linear-gradient(180deg, rgba(24,82,71,1) 0%, rgba(22,152,173,0) 84%);">'+response+'</div>');
+ function eventFire(el, etype){
+    if (el.fireEvent) {
+      el.fireEvent('on' + etype);
+    } else {
+      var evObj = document.createEvent('Events');
+      evObj.initEvent(etype, true, false);
+      el.dispatchEvent(evObj);
+    }
+  }
 
 
 

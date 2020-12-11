@@ -9,63 +9,75 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="jumbotron">
-                    <h2>
-                        Bem vindo ao Smart Presence by Fit/Flex
-                    </h2>
-                    <p>
-                        Esta solução tem o intuito de transformar a sua Meeting em uma sala de aula!, faça sua chamada e
-                        monitore quanto tempo as pessoas ficam conectadas em sua aula,
-                        ao final de sua aula exporte um relatório com os dados de presença da reunião!
-                        <b>let's start!</b>
-                    </p>
-                </div>
-                <div class="row time-meeting">
-                    <div class="col-md-4">
-                        <h2>
-                            Tempo de reunião até agora:
-                        </h2>
+                <div class="jumbotron" style=" background: #1c1d1d8f; color: #4b9194d1; margin-bottom: 5px;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>
+                                Bem vindo ao Smart Presence by Fit/Flex
+                            </h2>
+                            <p>
+                                Esta solução tem o intuito de transformar a sua Meeting em uma sala de aula!, faça sua chamada e
+                                monitore quanto tempo as pessoas ficam conectadas em sua aula,
+                                ao final de sua aula exporte um relatório com os dados de presença da reunião!
+                                <b>let's start!</b>
+                            </p>
+                        </div>
+                        <!-- <div id="logos-company" class="col-md-4">
+                            
+                        </div> -->
                     </div>
-                    <div class="col-md-8 text-rigth">
+                   
+                </div>
+                <div class="row time-meeting"
+                    style=" margin-bottom: 10px; background-color: #3035547d; margin-left: 1px; margin-right: 1px;">
+                    <div class="col-md-4" style="vertical-align: middle; display: list-item;">
                         <div class="row">
-                            <div class="col-md-6">
-                                <h2>
-                                    50.3
-                                </h2>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <dvi class="col-md-6">
-                                        <p>Para contador</p>
-                                        <button type="button" id="stop-counter" class="btn btn-danger">Parar</button>
-                                    </dvi>
-                                    <dvi class="col-md-6">
-                                        <p>iniciar contador</p>
-                                        <button type="button" id="start-counter"
-                                            class="btn btn-success">Iniciar</button>
-                                    </dvi>
+                            <dvi class="col-md-6">
+                                <div class="form-group">
+                                    <label style="color: #f0ffff85;" for="stop-counter">Parar contador:</label>
+                                    <button type="button" id="stop-counter" class="btn btn-danger">Parar</button>
                                 </div>
+                            </dvi>
+                            <dvi class="col-md-6">
+                                <div class="form-group">
+                                    <label style="color: #f0ffff85;" for="stop-counter">iniciar contador:</label>
+                                    <button type="button" id="start-counter" class="btn btn-success">Iniciar</button>
+                                </div>
+                            </dvi>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-8 text-rigth" style="vertical-align: middle; display: list-item;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 id="screen-timer" style="margin-top: 0px; margin-top: 0px; color: #d2691e8c;">
+
+                                </h2>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" style="display: flex;flex-wrap: wrap;">
                     <div class="col-md-4">
-                        <h1>Pessoas na reunião!</h1>
-                        <hr>
+                        <div class="presentation-title"
+                            style="background: #8a2be23d; color: #ffffff8c; padding: 15px; margin-bottom: 9px;">
+                            <h1>Pessoas na reunião!</h1>
+                            <p>Veja quem está online e o tempo de presença.</p>
+                        </div>
                         <div id="app-4">
-                            <table class="flat-table flat-table-1">
+                            <table class="table table-responsible flat-table flat-table-1">
                                 <thead>
                                     <th>Nome</th>
                                     <th>Tempo</th>
-                                    <th>Porcentagem%</th>
+                                    <th>% de Presença</th>
 
                                 </thead>
                                 <tbody>
                                     <tr v-for="todo in todos">
                                         <td>{{ todo.nome }}</td>
-                                        <td>{{ todo.tempo }}</td>
-                                        <td>100%</td>
+                                        <td>{{ todo.tempo  | durationFormat }}</td>
+                                        <td>{{ todo.porcentagem }}%</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -74,24 +86,33 @@
                     </div>
                     <div class="col-md-4">
                         <div id=app-5>
-                            <div class="form-group" v-for="(input,k) in inputs" :key="k">
-                              <input type="text" class="form-control" v-model="input.name">
-                              <input type="text" class="form-control" v-model="input.party">
-                              <span>
-                                <i class="fas fa-minus-circle" @click="remove(k)" v-show="k || ( !k && inputs.length > 1)">Remove</i>
-                                <i class="fas fa-plus-circle" @click="add(k)" v-show="k == inputs.length-1">Add fields</i>
-                              </span>
+                            <div class="presentation-title"
+                                style="background: #8a2be23d; color: #ffffff8c; padding: 15px; margin-bottom: 9px;">
+                                <h1>Adicionar pessoas</h1>
+                                <p>Adicione aqui as pessoas que devem estar em sua reunião.</p>
                             </div>
-                            <button @click="addCandidate">
-                              Submit
-                            </button>
-                          </div>
 
+
+                            <form class="form-inline" v-on:submit.prevent="addNewUser">
+                                <input class="form-control" v-model="user.nome"
+                                    style="background: #353a3ade; color: white; border-color: #2f3533; " />
+                                <!-- <input class="form-control" v-model="user.tempo"
+                                    style="background: #353a3ade; color: white; border-color: #2f3533; " /> -->
+                                <button class="btn btn-primary" style=" background: #0e71eb70;" type="submit">
+                                    Add User
+                                </button>
+                            </form>
+                        </div>
                     </div>
                     <div class="col-md-4">
-                        <h2>Exportar dados</h2>
-                        <hr>
-                        <button type="button" id="downloadcsv" class="btn btn-default">Download</button>
+                        <div class="presentation-title"
+                            style="background: #8a2be23d; color: #ffffff8c; padding: 15px; margin-bottom: 9px;">
+                            <h1>Exportar dados</h1>
+                            <p>Faça download das informações de presença em sua reunião.</p>
+                        </div>
+
+                        <button type="button" id="downloadcsv" class="btn btn-success"
+                            style="background: #5cb85c61;">Download</button>
                     </div>
                 </div>
             </div>
@@ -125,7 +146,6 @@
                 items.unshift(headers);
             }
 
-            // Convert Object to JSON
             var jsonObject = JSON.stringify(items);
 
             var csv = this.convertToCSV(jsonObject);
@@ -137,7 +157,8 @@
                 navigator.msSaveBlob(blob, exportedFilenmae);
             } else {
                 var link = document.createElement("a");
-                if (link.download !== undefined) { // feature detection
+                if (link.download !== undefined) {
+                    // feature detection
                     // Browsers that support HTML5 download attribute
                     var url = URL.createObjectURL(blob);
                     link.setAttribute("href", url);
@@ -157,23 +178,14 @@
                 // percentage: "Porcentagem",
             };
 
-            // itemsNotFormatted = [
-            // {
-            //     Id: 0,
-            //     nome:"Reginaldo",
-            //     tempo:"1.28"
-            // }]
-
-
             var itemsFormatted = [];
             alert(JSON.stringify(obj));
 
-            // format the data
             obj.forEach((item) => {
                 itemsFormatted.push({
                     id: item.id,
                     nome: item.nome.replace(/,/g, ''), // remove virgula para evitar erros
-                    tempo: item.tempo,
+                    tempo: passTotime(item.tempo),
                 });
             });
 
@@ -194,7 +206,6 @@
             loadScript(chrome.extension.getURL("/assets/js/lib/bootstrap.min.js"))
             loadStyle(chrome.extension.getURL("/assets/css/bootstrap.min.css"))
             loadStyle(chrome.extension.getURL("background.css"))
-
 
 
             $("#start-counter").click(function () {
@@ -226,6 +237,7 @@
 
         });
 
+        var meetingTime = 0;
         var timerID = null;
         var participantsinfo = []
         var timeInMeeting = {};
@@ -244,8 +256,13 @@
         function ParticipantsTracker(participants, refreshTime,) {
             var dados = {};
             var i = 0;
+
+            meetingTime = meetingTime + refreshTime;
+            var meetingTimeScreen = new Date(meetingTime).toISOString().substr(11, 8)
+            $("#screen-timer").html('Tempo de reunião até agora: <b>' + meetingTimeScreen + '</b>');
+
             for (var key in timeInMeeting) {
-                timeInMeeting[key] = this.getParticipantTime(timeInMeeting, key, Math.floor((refreshTime / 60000) * 100) / 100);
+                timeInMeeting[key] = this.getParticipantTime(timeInMeeting, key, refreshTime);
 
                 index = participantsinfo.findIndex(x => x.nome === key);
 
@@ -256,6 +273,7 @@
                     dados["nome"] = key;
                     this.myNumber
                     dados["tempo"] = (timeInMeeting[key]).toFixed(2);
+                    dados["porcentagem"] = ((timeInMeeting[key]).toFixed(2) / meetingTime) * 100;
                     participantsinfo.push(dados);
                     dados = {};
                 } else {
@@ -267,10 +285,6 @@
                     }
 
                 }
-
-
-
-
                 i++;
             }
 
@@ -349,6 +363,17 @@
             head.appendChild(script);
         }
 
+        function passTotime(value){
+            return Math.floor(value/(1000*60*60)) + ":" + Math.floor(value/(1000*60))%60 + ":" + Math.floor(value/1000)%60;
+        }
+
+
+        // register global filter
+        Vue.filter('durationFormat', function (value) {
+            result = Math.floor(value/(1000*60*60)) + ":" + Math.floor(value/(1000*60))%60 + ":" + Math.floor(value/1000)%60;
+           return result; 
+        });
+
         var app4 = new Vue({
             el: '#app-4',
             data: {
@@ -358,33 +383,16 @@
 
         var app5 = new Vue({
             el: '#app-5',
-
-            data() {
-                return {
-                    inputs: [{
-                        name: '',
-                        party: ''
-                    }]
-                }
+            data: {
+                users: participantsinfo,
+                user: { nome: "", tempo: 0, porcentagem: 0 }
             },
-
             methods: {
-                add() {
-                    this.inputs.push({
-                        name: '',
-                        party: ''
-                    })
-                    console.log(this.inputs)
-                },
-
-                remove(index) {
-                    this.inputs.splice(index, 1)
-                },
-                addCandidate() {
-                   
+                addNewUser() {
+                    participantsinfo.push({ nome: this.user.nome, tempo: this.user.tempo, porcentagem: this.user.porcentagem })
                 }
             }
-        })
+        });
     </script>
 </body>
 
