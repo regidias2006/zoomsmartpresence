@@ -2,6 +2,8 @@
 
 Projeto feito para participar do Hackathon do FIT/FLEX.
 
+O intuito principal da aplicação é auxiliar no controle de presença nos treinamentos, atualmente como descrevido nos tópicos do Hackthon o controle é mantido via excel/word, está solução vem como um DRAFT para controlar a presença dos participantes em cada curso ministrado, sendo assim será possível extrair métricas de presença nas meetings e anexar aos arquivos existentes, em um nível mais acima o projeto pode ser integrado com um Bakc End e Camadas de persistencias para controle mais apurado das informações dos cursandos.
+
 A solução é baseada na criação de uma extensão via google chrome para manipular os dados html existentes.
 
 ## Installation
